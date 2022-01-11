@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Filter Coffee</title>
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+        body{
+            text-align: center !important;
+        }
+        #id{
+            font-family: 'Secular One', sans-serif;
+            font-size: 20px;
+            padding: 5px 10px;
+            color: white;
+            background: #0000FF;
+            width: 100px;
+            margin-top: 10px;
+            text-align: center;
+            border-radius: 5px;
+            transition: linear 0.2s;
+            text-decoration: none;
+            outline: none;
+            border: none;
+        }
+        #url{
+            position: relative;
+            top: 0px;
+            left: 0px;
+            font-family: 'Secular One', sans-serif;
+            font-size: 15px;
+            padding: 10px 5px;
+            outline: none;
+            width: 500px;
+        }
+        canvas{
+            align-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        h1{
+            font-family: 'Secular One', sans-serif;
+            font-size: 30px;
+        }
+        h2{
+            display: flex;
+            font-family: 'Secular One', sans-serif;
+            font-size: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .iconify{
+            font-size: 20px;
+            margin: 5px;
+            font-weight: bold;
+            width: 30px;
+        }
+
+        .card {
+            position: relative;
+            padding: 1rem;
+            background: #eee;
+            border-radius: 8px;
+        }
+
+        input{
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+
+        .filter {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            grid-gap: 1rem;
+            padding: 1rem;
+            margin: 0;
+            background: black;
+        }
+
+    </style>
+</head>
+<body>
+<h2><span class="iconify" data-icon="uil:coffee"></span>Enter the Image URL:</h2>
+<input type="text" id="url"/>
+<button id="id" onclick="changeURL()">Generate</button>
+<br>
+<h1>Original Image</h1>
+<img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" id="img-box" alt="">
+<br>
+<h1>Filtered Images:</h1>
+<div class="filter">
+    <img id="filter1" style="filter: grayscale(var(--value, 100%));" data-type="%" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="ukulele">
+
+    <img id="filter2" style="filter: sepia(var(--value, 100%)" data-type="%" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="ukulele">
+
+    <img id="filter3" style="filter: saturate(var(--value, 5))" data-type="float" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="ukulele">
+
+    <img id="filter4" style="filter: hue-rotate(var(--value, 360deg))" data-type="angle" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="ukulele">
+
+    <img id="filter5" style="filter: invert(var(--value, 100%))" data-type="%" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="ukulele">
+
+    <img id="filter6" style="filter: opacity(var(--value, 100%))" data-type="%" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="ukulele">
+
+    <img id="filter7" style="filter: brightness(var(--value, 5))" data-type="float" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="ukulele">
+
+    <img id="filter8" style="filter: contrast(var(--value, 5))" data-type="float" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="ukulele">
+
+    <img id="filter9" style="filter: blur(var(--value, 1rem))" data-type="px" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="ukulele">
+</div>
+
+<br>
+<script>
+    function changeURL(){
+            document.getElementById("img-box").src = document.getElementById("url").value;
+            document.getElementById("filter1").src = document.getElementById("url").value;
+        document.getElementById("filter2").src = document.getElementById("url").value;
+        document.getElementById("filter3").src = document.getElementById("url").value;
+        document.getElementById("filter4").src = document.getElementById("url").value;
+        document.getElementById("filter5").src = document.getElementById("url").value;
+        document.getElementById("filter6").src = document.getElementById("url").value;
+        document.getElementById("filter7").src = document.getElementById("url").value;
+        document.getElementById("filter8").src = document.getElementById("url").value;
+        document.getElementById("filter9").src = document.getElementById("url").value;
+    }
+
+    function wrap(el) {
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("card");
+
+        let max;
+
+        if (el.dataset.type === "%") {
+            max = 100;
+        } else if (el.dataset.type === "angle") {
+            max = 360;
+        } else if (el.dataset.type === "px") {
+            max = 20;
+        } else {
+            max = 4;
+        }
+        wrapper.insertAdjacentHTML(
+            "beforeEnd",
+            `<input type='range' min="0" max="${max}" value="100">`
+        );
+
+        el.parentNode.insertBefore(wrapper, el);
+        wrapper.appendChild(el);
+        wrapper.insertAdjacentHTML(
+            "beforeEnd",
+            `<pre class='output'>{
+  ${el.getAttribute("style")}
+}</pre>`
+        );
+
+        return wrapper;
+    }
+
+    const imgs = document.querySelectorAll("img");
+
+    imgs.forEach((img) => {
+        if(img.id == "img-box")
+            return;
+        const wrapper = wrap(img);
+
+        let range = wrapper.querySelector("input");
+        range.addEventListener("input", (e) => {
+            let newValue;
+
+            if (img.dataset.type === "%") {
+                newValue = e.target.value + "%";
+            } else if (img.dataset.type === "angle") {
+                newValue = e.target.value + "deg";
+            } else if (img.dataset.type === "px") {
+                newValue = e.target.value + "px";
+            } else {
+                newValue = e.target.value;
+            }
+
+            img.style.setProperty("--value", newValue);
+            const output = wrapper.querySelector(".output");
+            output.innerHTML = `{
+  ${img.getAttribute("style")}
+}`;
+        });
+    });
+</script>
+</body>
+</html>
